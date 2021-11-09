@@ -1,66 +1,25 @@
-drop database if exists productdb;
-create database productdb;
-use productdb;
+drop database if exists webshop;
+create database webshop;
+use webshop;
 
-
-CREATE TABLE customer(
-    customer_id int NOT NULL AUTO_INCREMENT,
-    customer_name varchar(50) NOT NULL,
-    PRIMARY KEY (customer_id)
+create table category (
+    id int primary key auto_increment,
+    name varchar(50) not null
 );
 
-CREATE TABLE customer_order(
-    order_id int NOT NULL AUTO_INCREMENT,
-    customer_id int NOT NULL,
-    PRIMARY KEY (order_id),
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+create table product (
+    id int primary key auto_increment,
+    name varchar(100) not null,
+    price double (10,2) not null,
+    image varchar(50),
+    category_id int not null,
+    index category_id(category_id),
+    foreign_key (category_id) references category(id)
+    on delete restrict
 );
 
-CREATE TABLE category(
-    category_id int NOT NULL AUTO_INCREMENT,
-    category_name varchar(50) NOT NULL,
-    PRIMARY KEY (category_id)
-);
+insert into category(name) value ('Shoes');
+insert into category(name) value ('Pants');
+insert into category(name) value ('Kahvia');
 
-CREATE TABLE product(
-    product_id int NOT NULL AUTO_INCREMENT,
-    product_name varchar(50) NOT NULL,
-    category_id int NOT NULL,
-    PRIMARY KEY (product_id),
-    FOREIGN KEY (category_id) REFERENCES category(category_id)
-);
-
-
-CREATE TABLE order_product(
-    order_id int NOT NULL,
-    product_id int NOT NULL,
-    quantity int NOT NULL,
-    PRIMARY KEY (order_id,product_id),
-    FOREIGN KEY (order_id) REFERENCES customer_order(order_id),
-    FOREIGN KEY (product_id) REFERENCES product(product_id)
-);
-
-INSERT INTO customer (customer_name) VALUES 
-    ("John Doe"), ("Lisa Simpson"), ("Marco Polo"), ("Donald Duck"),
-    ("Julia Roberts"), ("Mandy Monroe"), ("Jack Black");
-    
-INSERT INTO category (category_name) VALUES
-    ("Audio"), ("Cables"), ("Cameras"), ("Software"), ("Phones");
-
-INSERT INTO product (product_name, category_id) VALUES
-    ("Airpods", 1), ( "Sennheiser PC 8", 1), ( "Genelec G One B", 1),
-    ("Yamaha WXC-50", 1), ( "JBL Flip Essential", 1),( "Jabra Speak 410", 1),
-    ("Deltaco CAT5e", 2),( "HAMA RCA", 2),( "Deltaco TOSLINK", 2),( "HAMA XLR", 2),
-    ("Canon EOS 500D", 3), ( "Canon RF 24--70mm", 3), ( "Sigma 24-70mm", 3),
-    ("GoPro HERO9", 3), ( "Adobe Photoshop", 4), ( "F-secure Total", 4),
-    ("Windows 10 Home", 4), ( "OnePlust Nord 2", 5), ( "Google Pixel 4a", 5),
-    ("Samsung Galaxy A22", 5);
-
-INSERT INTO customer_order (customer_id) VALUES
-    ( 1), ( 2), ( 3);
-
-INSERT INTO order_product (order_id, product_id, quantity) VALUES
-    (1, 1, 4), (1, 5, 2), (1, 8, 1),
-    (2, 4, 1), (2, 5, 1), 
-    (3, 12, 1), (3, 15, 1), (3, 11, 3);
-    
+/* tää ei sitten toimi atm */
