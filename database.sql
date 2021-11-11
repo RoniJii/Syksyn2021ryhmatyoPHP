@@ -14,12 +14,12 @@ create table product (
     image varchar(50),
     category_id int not null,
     index category_id(category_id),
-    foreign_key (category_id) references category(id)
+    foreign key (category_id) references category(id)
     on delete restrict
 );
 
-insert into category(name) value ('Shoes');
-insert into category(name) value ('Pants');
 insert into category(name) value ('Kahvia');
+insert into category(name) value ('Erinlaista kahvia');
 
-/* tää ei sitten toimi atm */
+insert into product(name, price, category_id) values ('Testi kahvi', 10, 1);
+insert into product(name, price, category_id) values ('Testi kahvi2', 20, 1);
