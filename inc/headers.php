@@ -1,4 +1,13 @@
 <?php
+
+include('C:/xampp/htdocs/syksynprojekti2021/fb/BeforeValidException.php');
+include('C:/xampp/htdocs/syksynprojekti2021/fb/ExpiredException.php');
+include('C:/xampp/htdocs/syksynprojekti2021/fb/JWK.php');
+include('C:/xampp/htdocs/syksynprojekti2021/fb/JWT.php');
+include('C:/xampp/htdocs/syksynprojekti2021/fb/Key.php');
+include('C:/xampp/htdocs/syksynprojekti2021/fb/SignatureInvalidException.php');  
+
+
 if (isset($_SERVER['HTTP_ORIGIN'])) {
 header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
 header('Access-Control-Allow-Credentials:true');
